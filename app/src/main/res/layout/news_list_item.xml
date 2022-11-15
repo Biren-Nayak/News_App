@@ -15,12 +15,13 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="@dimen/default_radius"
         android:layout_width="match_parent"
         android:minHeight="?actionBarSize"
         android:onClick="@{() -> clickListener.onClick(article)}"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginHorizontal="@dimen/margin">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,13 +33,12 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:text="@{article.source.name}"
                 android:textStyle="bold"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/title"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
                 tools:text="@tools:sample/first_names" />
 
 
@@ -46,14 +46,13 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/margin"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:text='@{article.title.split("-")[0]}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/name"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.513"
                 tools:text="@tools:sample/full_names" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

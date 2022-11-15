@@ -7,17 +7,17 @@ import androidx.room.RoomDatabase
 import com.example.newsapp.models.Article
 import com.example.newsapp.utils.TABLE_NAME
 
-@Database(entities = [Article::class], version = 1)
+@Database(entities = [Article::class], version = 5)
 abstract class NewsListDatabase : RoomDatabase() {
     abstract fun articlesDao(): ArticlesDao
 
     companion object {
-        @Volatile
-        private var INSTANCE: NewsListDatabase? = null
-
-        fun getDatabse(context: Context) = INSTANCE ?: synchronized(this) {
+        fun getDatabase(context: Context) = INSTANCE ?: synchronized(this) {
             buildRoomDB(context).also { INSTANCE = it }
         }
+
+        @Volatile
+        private var INSTANCE: NewsListDatabase? = null
 
         private fun buildRoomDB(context: Context) = Room
             .databaseBuilder(context, NewsListDatabase::class.java, TABLE_NAME)

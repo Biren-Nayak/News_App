@@ -1,7 +1,6 @@
 package com.example.newsapp.adapters
 
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -9,12 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.newsapp.R
 import com.example.newsapp.models.Article
+import com.example.newsapp.utils.*
 import com.example.newsapp.utils.FetchStatus.*
-import com.example.newsapp.utils.DATA
-import com.example.newsapp.utils.FETCH_STATUS
-import com.example.newsapp.utils.FetchStatus
 import com.example.newsapp.utils.FetchStatus.SUCCESS
-import com.example.newsapp.utils.IMG_URL
 
 
 @BindingAdapter(DATA)
@@ -27,7 +23,7 @@ fun bindData(recyclerView: RecyclerView, data: List<Article>?){
 @BindingAdapter(IMG_URL)
 fun bindImage(imageView: ImageView, imgUrl: String?){
     imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        val imgUri = imgUrl.toUri().buildUpon().scheme(HTTPS).build()
         imageView.load(imgUri){
             placeholder(R.drawable.loading_animation)
             error(R.drawable.ic_broken_image)
@@ -42,12 +38,12 @@ fun fetchStatus(imageView: ImageView, status: FetchStatus){
         SUCCESS -> imageView.visibility = GONE
 
         LOADING -> {
-            imageView.visibility = VISIBLE
+            imageView.visibility = INVISIBLE
             imageView.setImageResource(R.drawable.loading_animation)
          }
 
         ERROR -> {
-            imageView.visibility = VISIBLE
+            imageView.visibility = INVISIBLE
             imageView.setImageResource(R.drawable.ic_error)
          }
     }

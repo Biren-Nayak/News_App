@@ -1,26 +1,26 @@
 package com.example.newsapp.ui.viewmodels
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.newsapp.database.NewsListDatabase
 import com.example.newsapp.models.Article
 import com.example.newsapp.network.NewsApi
+import com.example.newsapp.repository.ArticleRepository
 import com.example.newsapp.utils.FetchStatus
 import com.example.newsapp.utils.FetchStatus.*
 import kotlinx.coroutines.launch
 
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : ViewModel() {
 
+    private val articlesRepository = ArticleRepository(NewsListDatabase.getDatabase(application))
 
     private val _status = MutableLiveData<FetchStatus>()
     val status: LiveData<FetchStatus> = _status
 
 
-    private val _listData = MutableLiveData<List<Article>>()
-    val listData: LiveData<List<Article>> = _listData
+    val listData = articlesRepository.articles
 
     private val _selectedArticle = MutableLiveData<Article>()
     val selectedArticle: LiveData<Article> = _selectedArticle
@@ -35,13 +35,10 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             _status.value = LOADING
             try {
-                _listData.value = NewsApi.retrofitService.getNews().articles
+                articlesRepository.refreshVideos()
                 _status.value = SUCCESS
-
-                Log.e("TAG", _listData.value?.first()?.title.toString())
             }catch (e: Exception){
                 _status.value = ERROR
-                _listData.value = listOf()
                 Log.e("TAG", e.message!!)
             }
         }
@@ -51,4 +48,15 @@ class MainViewModel : ViewModel() {
         _selectedArticle.value = article
     }
 
+}
+
+class MainViewModelFactory(val application: Application): ViewModelProvider.Factory{
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)){
+            @Suppress("UNCHECKED_CAST")
+            return MainViewModel(application) as T
+        }
+        throw IllegalArgumentException("Cannot create viewModel")
+    }
 }

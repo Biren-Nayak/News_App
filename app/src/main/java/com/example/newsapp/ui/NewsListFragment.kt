@@ -11,11 +11,14 @@ import com.example.newsapp.R
 import com.example.newsapp.adapters.NewsItemAdapter
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.viewmodels.MainViewModel
+import com.example.newsapp.ui.viewmodels.MainViewModelFactory
 
 class NewsListFragment : Fragment() {
 
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels {
+        activity?.application?.let { MainViewModelFactory(it) }!!
+    }
 
 
     private lateinit var binding: FragmentNewsListBinding

@@ -10,8 +10,8 @@ class SourceTypeConverter {
     @TypeConverter
     fun fromSource(source: Source): String{
         return JSONObject().apply {
-            put(id, source.id)
-            put(name, source.name)
+            put(id, source.id ?: "")
+            put(name, source.name ?: "")
         }.toString()
     }
 
