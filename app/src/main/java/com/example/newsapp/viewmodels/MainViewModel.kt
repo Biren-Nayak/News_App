@@ -1,14 +1,16 @@
-package com.example.newsapp.ui.viewmodels
+package com.example.newsapp.viewmodels
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.newsapp.database.NewsListDatabase
 import com.example.newsapp.models.Article
-import com.example.newsapp.network.NewsApi
 import com.example.newsapp.repository.ArticleRepository
-import com.example.newsapp.utils.FetchStatus
-import com.example.newsapp.utils.FetchStatus.*
+import com.example.newsapp.utils.Constants.FetchStatus
+import com.example.newsapp.utils.Constants.FetchStatus.*
 import kotlinx.coroutines.launch
 
 
@@ -50,13 +52,3 @@ class MainViewModel(application: Application) : ViewModel() {
 
 }
 
-class MainViewModelFactory(val application: Application): ViewModelProvider.Factory{
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)){
-            @Suppress("UNCHECKED_CAST")
-            return MainViewModel(application) as T
-        }
-        throw IllegalArgumentException("Cannot create viewModel")
-    }
-}
