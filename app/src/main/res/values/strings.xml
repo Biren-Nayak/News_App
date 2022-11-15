@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">News App</string>
+    <string name="news_list">News List</string>
+    <string name="news_detail">News Detail</string>
+    <string name="read_more">Read more</string>
+    <string name="delimiter">…</string>
+</resources>
