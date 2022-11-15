@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.newsapp.R
 import com.example.newsapp.adapters.NewsItemAdapter
 import com.example.newsapp.databinding.FragmentNewsListBinding
-import com.example.newsapp.ui.viewmodels.MainViewModel
-import com.example.newsapp.ui.viewmodels.MainViewModelFactory
+import com.example.newsapp.viewmodels.MainViewModel
+import com.example.newsapp.viewmodels.MainViewModelFactory
 
 class NewsListFragment : Fragment() {
 
@@ -37,7 +37,8 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.adapter = NewsItemAdapter( NewsItemAdapter.ArticleListener { article ->
+        binding.recyclerView.adapter = NewsItemAdapter(
+            NewsItemAdapter.ArticleListener { article ->
             viewModel.onArticleClicked(article)
             findNavController().navigate(R.id.action_newsListFragment_to_newsDetailFragment)
         })

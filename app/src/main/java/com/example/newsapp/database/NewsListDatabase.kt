@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.newsapp.models.Article
-import com.example.newsapp.utils.TABLE_NAME
+import com.example.newsapp.utils.Constants.TABLE_NAME
 
 @Database(entities = [Article::class], version = 5)
 abstract class NewsListDatabase : RoomDatabase() {

@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.newsapp.R
 import com.example.newsapp.models.Article
-import com.example.newsapp.utils.*
-import com.example.newsapp.utils.FetchStatus.*
-import com.example.newsapp.utils.FetchStatus.SUCCESS
+import com.example.newsapp.utils.Constants
+import com.example.newsapp.utils.Constants.HTTPS
+import com.example.newsapp.utils.Constants.DATA
+import com.example.newsapp.utils.Constants.FETCH_STATUS
+import com.example.newsapp.utils.Constants.FetchStatus.*
+import com.example.newsapp.utils.Constants.IMG_URL
 
 
 @BindingAdapter(DATA)
@@ -33,7 +36,7 @@ fun bindImage(imageView: ImageView, imgUrl: String?){
 
 
 @BindingAdapter(FETCH_STATUS)
-fun fetchStatus(imageView: ImageView, status: FetchStatus){
+fun fetchStatus(imageView: ImageView, status: Constants.FetchStatus){
     when(status){
         SUCCESS -> imageView.visibility = GONE
 

@@ -11,7 +11,7 @@ import com.example.newsapp.models.Article
 
 class NewsItemAdapter(private val clickListener: ArticleListener): ListAdapter<Article, NewsItemViewHolder>(DiffCallBack) {
 
-    class NewsItemViewHolder(var binding: NewsListItemBinding): RecyclerView.ViewHolder(binding.root){
+    class NewsItemViewHolder(private var binding: NewsListItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(clickListener: ArticleListener, article: Article){
             binding.article = article
             binding.clickListener = clickListener
@@ -21,9 +21,7 @@ class NewsItemAdapter(private val clickListener: ArticleListener): ListAdapter<A
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        NewsItemViewHolder(NewsListItemBinding.inflate(
-            LayoutInflater.from(parent.context),parent, false
-        ))
+        NewsItemViewHolder(NewsListItemBinding.inflate(LayoutInflater.from(parent.context),parent, false))
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) =
         holder.bind( clickListener, getItem(position) )

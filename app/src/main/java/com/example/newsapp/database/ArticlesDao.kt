@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.newsapp.models.Article
-import com.example.newsapp.utils.TABLE_NAME
+import com.example.newsapp.utils.Constants.TABLE_NAME
 import kotlinx.coroutines.flow.Flow
 
 
