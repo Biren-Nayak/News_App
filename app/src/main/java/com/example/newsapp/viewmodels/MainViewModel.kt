@@ -21,28 +21,34 @@ class MainViewModel(application: Application) : ViewModel() {
     private val _status = MutableLiveData<FetchStatus>()
     val status: LiveData<FetchStatus> = _status
 
+
     val listData = articlesRepository.articles
 
     private val _selectedArticle = MutableLiveData<Article>()
     val selectedArticle: LiveData<Article> = _selectedArticle
 
 
-    private fun refreshDataFromRepository() = viewModelScope.launch {
-        _status.value = LOADING
-        try {
-            articlesRepository.refreshVideos()
-            _status.value = SUCCESS
-        }catch (e: Exception){
-            _status.value = ERROR
-            Log.e("TAG", e.message!!)
+
+    init {
+        refreshDataFromRepository()
+    }
+
+    private fun refreshDataFromRepository(){
+        viewModelScope.launch {
+            _status.value = LOADING
+            try {
+                articlesRepository.refreshVideos()
+                _status.value = SUCCESS
+            }catch (e: Exception){
+                _status.value = ERROR
+                Log.e("TAG", e.message!!)
+            }
         }
     }
 
-
-    fun onArticleClicked(article: Article) { _selectedArticle.value = article }
-
-    init { refreshDataFromRepository() }
-
+    fun onArticleClicked(article: Article){
+        _selectedArticle.value = article
+    }
 
 }
 
