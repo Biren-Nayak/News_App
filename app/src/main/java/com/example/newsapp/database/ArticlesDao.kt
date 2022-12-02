@@ -14,6 +14,9 @@ interface ArticlesDao{
     @Query("SELECT * FROM $TABLE_NAME")
     fun getAllArticles(): Flow<List<Article>>
 
+    @Query("DELETE FROM $TABLE_NAME")
+    suspend fun clear()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticle(vararg article: Article)
 

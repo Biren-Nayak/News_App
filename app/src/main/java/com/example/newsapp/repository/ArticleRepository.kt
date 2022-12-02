@@ -12,6 +12,9 @@ class ArticleRepository(private val database: NewsListDatabase) {
 
     suspend fun refreshVideos(){
         val articles =  NewsApiService.retrofitService.getNews().articles
-        database.articlesDao().insertArticle(*articles.toTypedArray())
+        database.articlesDao().apply{
+            clear()
+            insertArticle(*articles.toTypedArray())
+        }
     }
 }
