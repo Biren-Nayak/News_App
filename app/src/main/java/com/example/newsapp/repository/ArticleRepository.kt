@@ -10,8 +10,11 @@ class ArticleRepository(private val database: NewsListDatabase) {
 
     val articles: LiveData<List<Article>> = database.articlesDao().getAllArticles().asLiveData()
 
-    suspend fun refreshVideos(){
-        val articles =  NewsApiService.retrofitService.getNews().articles
+    suspend fun refreshVideos(value: String) {
+        val articles =  if (value.isBlank())
+            NewsApiService.retrofitService.getNews().articles
+            else
+                NewsApiService.retrofitService.getNews(value).articles
         database.articlesDao().apply{
             clear()
             insertArticle(*articles.toTypedArray())

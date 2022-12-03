@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.newsapp.database.NewsListDatabase
 import com.example.newsapp.models.Article
 import com.example.newsapp.repository.ArticleRepository
+import com.example.newsapp.utils.Constants.CATEGORY_BUSINESS
 import com.example.newsapp.utils.Constants.FetchStatus
 import com.example.newsapp.utils.Constants.FetchStatus.*
 import kotlinx.coroutines.launch
@@ -28,16 +29,13 @@ class MainViewModel(application: Application) : ViewModel() {
     val selectedArticle: LiveData<Article> = _selectedArticle
 
 
+    init { refreshDataFromRepository() }
 
-    init {
-        refreshDataFromRepository()
-    }
-
-    private fun refreshDataFromRepository(){
+    fun refreshDataFromRepository(category: String = CATEGORY_BUSINESS){
         viewModelScope.launch {
             _status.value = LOADING
             try {
-                articlesRepository.refreshVideos()
+                articlesRepository.refreshVideos(category)
                 _status.value = SUCCESS
             }catch (e: Exception){
                 _status.value = ERROR

@@ -2,7 +2,7 @@ package com.example.newsapp.utils
 
 object Constants{
     const val BASE_URL = "https://saurav.tech/NewsAPI/top-headlines/category/"
-    const val CATEGORY_HEALTH = "health"
+    const val CATEGORY_BUSINESS = "business"
     const val Country_DOMAIN = "in"
     const val FORMAT = "json"
     const val DATA = "data"
