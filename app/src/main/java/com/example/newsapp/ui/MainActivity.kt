@@ -3,14 +3,15 @@ package com.example.newsapp.ui
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.newsapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -24,11 +25,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
     }
 
-    override fun onSupportNavigateUp() =  navController.navigateUp() || super.onSupportNavigateUp()
+    override fun onSupportNavigateUp() = navController.navigateUp() || super.onSupportNavigateUp()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
 }

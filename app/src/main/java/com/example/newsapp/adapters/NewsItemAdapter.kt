@@ -9,10 +9,12 @@ import com.example.newsapp.adapters.NewsItemAdapter.NewsItemViewHolder
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.models.Article
 
-class NewsItemAdapter(private val clickListener: ArticleListener): ListAdapter<Article, NewsItemViewHolder>(DiffCallBack) {
+class NewsItemAdapter(private val clickListener: ArticleListener) :
+    ListAdapter<Article, NewsItemViewHolder>(DiffCallBack) {
 
-    class NewsItemViewHolder(private var binding: NewsListItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(clickListener: ArticleListener, article: Article){
+    class NewsItemViewHolder(private var binding: NewsListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(clickListener: ArticleListener, article: Article) {
             binding.article = article
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -21,19 +23,21 @@ class NewsItemAdapter(private val clickListener: ArticleListener): ListAdapter<A
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        NewsItemViewHolder(NewsListItemBinding.inflate(LayoutInflater.from(parent.context),parent, false))
+        NewsItemViewHolder(NewsListItemBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false))
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) =
-        holder.bind( clickListener, getItem(position) )
+        holder.bind(clickListener, getItem(position))
 
 
-
-    companion object DiffCallBack: DiffUtil.ItemCallback<Article>(){
+    companion object DiffCallBack : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article) = oldItem == newItem
-        override fun areContentsTheSame(oldItem: Article, newItem: Article) = oldItem.title == newItem.title
+        override fun areContentsTheSame(oldItem: Article, newItem: Article) =
+            oldItem.title == newItem.title
     }
 
-    class ArticleListener(val clickListener: (article: Article) -> Unit){
+    class ArticleListener(val clickListener: (article: Article) -> Unit) {
         fun onClick(article: Article) = clickListener(article)
     }
 

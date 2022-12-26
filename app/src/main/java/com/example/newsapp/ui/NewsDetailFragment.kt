@@ -10,22 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.newsapp.databinding.FragmentNewsDetailBinding
 import com.example.newsapp.viewmodels.MainViewModel
-import com.example.newsapp.viewmodels.MainViewModelFactory
 
 
 class NewsDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsDetailBinding
 
-    private val viewModel: MainViewModel by activityViewModels {
-        activity?.application?.let { MainViewModelFactory(it) }!!
-
-    }
+    private val viewModel: MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentNewsDetailBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
